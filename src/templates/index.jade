@@ -1,22 +1,38 @@
 doctype html
 html(lang="en")
   head
-    //allies form
-    p Username
-    input(type=t)
-    p First Name
-    input(type="text", name="firstname")
-    br
-    p Last Name
-    input(type="text", name="lastname")
-    br
-    p E-mail Address
-    input(type="text", name="email")
-    br
-    // office location
-    // phone
-
-    // other users
-    // username
-    // phone
+    form(method="post", action="/ally-success")
+     //allies form
+     p Name
+     input(type="text", name="name")
+     br
+     p E-mail Address
+     input(type="text", name="email")
+     br
+     // office location
+     p Office Location
+     input(type="text", name="office")
+     br
+     // phone
+     p Phone Number
+     input(type="text", name="phone")
+     br
+     // availability (no by defaults)
+     // just pass in
+     p Submit Ally Form
+     input(type="submit", name="submit")    
+  
+     // other users
+     //
+    form(method="post", action="/user-success")
+     // email
+     p E-mail Address
+     input(type="text", name="email")
+     br
+     // phone
+     p Phone Number
+     input(type="text", name="phone")
+     br
+     p Submit User Form
+     input(type="submit", name="submit")
   body

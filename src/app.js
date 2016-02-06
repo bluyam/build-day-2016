@@ -1,26 +1,63 @@
+//:Mom/s+sy .`:yy` od m+do+hm:dho`mhms`+ho:M +d `Ny  -M`yyhdos:Ms/:mhms .M.odohys/N hom:       
+//\:N:hhh +d/N/h/d/ +d/m:d+`md dy/:m/+h/y/N/N +d  d+  .N/hoho  -N///d`ms .N+ysdoom/N.N/yy       
+//./::/:-.--` -+:` `--..:``:-..:/::` -`.---:.-:.`.`   `-.`::.--/:-.. ...-/+:`/-.-`-`-..:       
+//.++osoyhho` :yo:   .:/: /o:- /so/      /++/+oss/.      /+/osooo/-    oyyys +sy/   ///.       
+//.+os``.shh+ :hso   -:/- /ho: /o+/      ooo:``:oo+      +ys+``.oso.  .ssydh.`sys- :s:-        
+//.syy   /ss+ -yso   /+y/ .+so :+s/      ooy-   o++-     +ys/   oso:  /ss.sy/ .ydy.hhs         
+//.syy:/+o+o. :os/   :oo+ -+// /os/      yyy:   yso.     :+s/   yhs/ `os+ oss` +ddhmd-         
+//-ssyoosyo:` -/ss   -+// :oyo :ss:      ++o-   ooy.     +os/   sdh/ -ss: -oy:  smmd+          
+//-yyy```:sys :s+o   -+o+ :sh/ :os+      +yy:   ysy.     /os+   +yh+ sys+/+hs/  -ydm`          
+//-ssy   .yo+`:++/   -/+/ +oyo -oo/      yyy-   o/+.     +oo/   oss:.y++oo++/o. -ody           
+//-ssh---//:- .o/+.../os- :yo/ /so/`--.- sss-``-///      /++/.`-ssy./so-`  -:/: -ssy           
+//-yhoydh+/-   ./osoos/-  :+o+ :oo++++o+ syso+yo+:       /o//+oo+/. hhs.   .yho :dhh 
+
 'use strict';
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var firebase = require('firebase');
 
 var ref = new Firebase('https://sizzling-heat-3815.firebaseio.com');
 
-// var usersRef = ref.child("Allies");
-
-// usersRef.set({
-	
-// });
-
 var app = express();
 
-//Sets up jade for express
+// sets up jade for express
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/templates');
+app.use(bodyParser.urlencoded({extended: true}));
 
-//Route
+// route
 app.get('/', function(req, res) {
-	//Send data to the client
+	// send data to the client
 	res.render('index');
+});
+
+///////// ALLY SUBMISSION ////////////
+app.post('/ally-success', function(req, res) {
+	console.log("ally submitted form");
+	console.dir(req.body);
+	// data from form
+	var name = req.body.name;
+	var email = req.body.email;
+	var office = req.body.office;
+	var phone = req.body.phone;
+	var availability = 0;
+
+	// submit this to firebase
+
+	// display success message
+	res.render('success');
+});
+
+///////// USER SUBMISSION ////////////
+app.post('/user-success', function(req, res) {
+	console.log("user submitted form");
+	console.dir(req.body);
+	// data from form
+	var email = req.body.email;
+	var phone = req.body.phone;
+	// display success message
+	res.render('success');
 });
 
 app.listen(3000, function() {
