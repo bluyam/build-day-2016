@@ -11,6 +11,11 @@
 // -ssh---//:- .o/+.../os- :yo/ /so/`--.- sss-``-///      /++/.`-ssy./so-`  -:/: -ssy           
 // -yhoydh+/-   ./osoos/-  :+o+ :oo++++o+ syso+yo+:       /o//+oo+/. hhs.   .yho :dhh 
 
+// TODO:
+// make it look pretty
+// make better use of templating
+// celebrate more wins, more successes, bless up
+
 'use strict';
 
 var express = require('express');
@@ -25,13 +30,17 @@ var app = express();
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/templates');
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static(__dirname + '/public'))
+app.use('/static',express.static(__dirname + '/public'));
 
 // route
 app.get('/', function(req, res) {
 	// send data to the client
 	res.render('index');
 });
+
+var availability = 0;
+var long = 0;
+var lat = 0;
 
 ///////// ALLY SUBMISSION ////////////
 app.post('/ally-success', function(req, res) {
@@ -43,7 +52,6 @@ app.post('/ally-success', function(req, res) {
 	var password = req.body.password;
 	var office = req.body.office;
 	var phone = req.body.phone;
-	var availability = 0;
 
 	// create new user
 	var allyRef = ref.child("ally");
@@ -64,7 +72,10 @@ app.post('/ally-success', function(req, res) {
 					name: name,
 					email: email,
 					office: office,
-					phone: phone
+					phone: phone,
+					availability: availability,
+					longitude: long,
+					latitude: lat,
 					};
 
     	allyRef.update(data); 
